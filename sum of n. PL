@@ -1,0 +1,9 @@
+% Base case: sum of numbers from 1 to 1 is 1
+sum(1, 1).
+
+% Recursive rule: sum of numbers from 1 to N is N plus the sum of numbers from 1 to N-1
+sum(N, Result) :-
+    N > 1,
+    Prev is N - 1,
+    sum(Prev, PrevSum),
+    Result is PrevSum + N.
