@@ -1,0 +1,30 @@
+% Define symptoms
+symptom(feel_tired).
+symptom(cough).
+symptom(fever).
+symptom(headache).
+symptom(sore_throat).
+symptom(body_ache).
+
+% Define diseases and their associated symptoms
+disease(cold, [cough, fever, sore_throat]).
+disease(flu, [fever, headache, body_ache]).
+disease(unknown, []).
+
+% Define rules for diagnosis
+diagnose(Disease) :-
+    findall(Symptom, symptom(Symptom), Symptoms),
+    check_disease(Symptoms, Disease).
+
+check_disease(Symptoms, Disease) :-
+    disease(Disease, DiseaseSymptoms),
+    subset(DiseaseSymptoms, Symptoms).
+
+% Query examples
+% Query: What disease can cause fever, headache, and body ache?
+% ?- diagnose(Disease).
+% Output: Disease = flu.
+
+% Query: What disease can cause cough and fever?
+% ?- diagnose(Disease).
+% Output: Disease = cold.
